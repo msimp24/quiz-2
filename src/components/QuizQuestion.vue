@@ -1,14 +1,25 @@
 <script setup>
 import BaseRadioGroup from './BaseRadioGroup.vue'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 const question = ref(props.question)
 const incorrectAnswers = ref(props.incorrectAnswers)
 const correctAnswer = ref(props.correctAnswer)
 const selected = ref(null)
+const isCorrect = ref(0)
+
+watch(() => {
+  if (selected.value === correctAnswer.value) {
+    isCorrect.value = 1
+  }
+  if (selected.value !== correctAnswer.value) {
+    isCorrect.value = 0
+  }
+})
 
 const options = computed(() => {
   let array = incorrectAnswers
+
   array.value.push(correctAnswer)
   array.value = array.value.map((str) => ({ value: str, label: str }))
   for (var i = array.value.length - 1; i > 0; i--) {
@@ -42,10 +53,20 @@ const props = defineProps({
 </script>
 
 <template>
-  <BaseRadioGroup v-model="selected" :name="index" :options="options" />
-  {{ question }}
+  <div class="column is-half-desktop">
+    <h1 class="is-size-4">{{ question }}</h1>
 
-  Selected:{{ selected }}
+    <BaseRadioGroup v-model="selected" :name="index" :options="options" />
+  </div>
+  {{ isCorrect }}
 </template>
 
-<style scoped></style>
+<style scoped>
+.column {
+  color: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  color: black;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+</style>

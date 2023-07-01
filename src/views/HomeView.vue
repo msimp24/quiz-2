@@ -58,7 +58,6 @@ const apiQuery = ref({
             label="Select the length of your quiz"
           >
           </BaseSelect>
-          {{ apiQuery }}
 
           <RouterLink
             :to="{
