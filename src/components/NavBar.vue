@@ -3,10 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <nav class="is-primary">
-    <RouterLink class="link" to="/">Home</RouterLink> <span>|</span>
-    <RouterLink class="link" to="/about">About</RouterLink>
-  </nav>
+  <nav class="is-primary"><RouterLink class="link" to="/">Home</RouterLink></nav>
   <RouterView />
 </template>
 

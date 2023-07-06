@@ -1,5 +1,7 @@
 <script>
+import { mapState } from 'pinia'
 import BaseRadio from './../components/BaseRadio.vue'
+import { useScoreStore } from './../stores/score'
 export default {
   props: {
     options: {
@@ -17,6 +19,9 @@ export default {
   },
   components: {
     BaseRadio
+  },
+  computed: {
+    ...mapState(useScoreStore, ['quizComplete'])
   }
 }
 </script>

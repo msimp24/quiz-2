@@ -12,4 +12,8 @@ import NavBar from './components/NavBar.vue'
 
 <style scoped>
 @import 'bulma/css/bulma.css';
+
+:root {
+  --primary: hsl(196, 78%, 89%);
+}
 </style>

@@ -1,36 +1,7 @@
 <script setup>
 import BaseRadioGroup from './BaseRadioGroup.vue'
 import { ref, computed, watch } from 'vue'
-
-const question = ref(props.question)
-const incorrectAnswers = ref(props.incorrectAnswers)
-const correctAnswer = ref(props.correctAnswer)
-const selected = ref(null)
-const isCorrect = ref(0)
-
-watch(() => {
-  if (selected.value === correctAnswer.value) {
-    isCorrect.value = 1
-  }
-  if (selected.value !== correctAnswer.value) {
-    isCorrect.value = 0
-  }
-})
-
-const options = computed(() => {
-  let array = incorrectAnswers
-
-  array.value.push(correctAnswer)
-  array.value = array.value.map((str) => ({ value: str, label: str }))
-  for (var i = array.value.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1))
-    var temp = array.value[i]
-    array.value[i] = array.value[j]
-    array.value[j] = temp
-  }
-
-  return array.value
-})
+import { useScoreStore } from './../stores/score'
 
 const props = defineProps({
   correctAnswer: {
@@ -50,6 +21,31 @@ const props = defineProps({
     required: true
   }
 })
+
+const question = ref(props.question)
+const incorrectAnswers = ref(props.incorrectAnswers)
+const correctAnswer = ref(props.correctAnswer)
+const selected = ref(null)
+const scoreStore = useScoreStore()
+
+watch(() => {
+  scoreStore.selected[props.index] = selected.value
+})
+
+const options = computed(() => {
+  let array = incorrectAnswers
+
+  array.value.push(correctAnswer)
+  array.value = array.value.map((str) => ({ value: str, label: str }))
+  for (var i = array.value.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1))
+    var temp = array.value[i]
+    array.value[i] = array.value[j]
+    array.value[j] = temp
+  }
+
+  return array.value
+})
 </script>
 
 <template>
@@ -57,8 +53,16 @@ const props = defineProps({
     <h1 class="is-size-4">{{ question }}</h1>
 
     <BaseRadioGroup v-model="selected" :name="index" :options="options" />
+
+    <div v-if="scoreStore.quizComplete">
+      <h1 v-if="correctAnswer === selected" class="title has-text-centered has-text-success">
+        Correct
+      </h1>
+      <h1 v-else class="title has-text-centered has-text-danger">
+        Incorrect! The correct answer is: {{ correctAnswer }}
+      </h1>
+    </div>
   </div>
-  {{ isCorrect }}
 </template>
 
 <style scoped>

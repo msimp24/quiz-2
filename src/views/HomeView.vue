@@ -40,6 +40,7 @@ const apiQuery = ref({
     <div class="container mt-5">
       <form class="columns is-centered">
         <fieldset>
+          <label class="m-5 is-size-5">Select a category</label>
           <select v-model="apiQuery.category" required>
             <option value=""></option>
             <option v-for="(item, index) in categories" :key="index" :value="index + 9">

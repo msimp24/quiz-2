@@ -33,8 +33,8 @@ input[type='radio'] {
   display: none;
 }
 input[type='radio']:checked + label {
-  background-color: black;
-  color: white;
+  background-color: hsl(171, 100%, 41%);
+  border: none;
 }
 label {
   display: flex;
@@ -42,10 +42,12 @@ label {
   height: 3rem;
   align-items: center;
   padding: 1rem;
-  background-color: hsl(196, 78%, 89%);
+
   cursor: pointer;
   border-radius: 1rem;
-  border: 2px solid rgb(111, 189, 231);
+  background-color: white;
+  color: black;
+  border: 0.15rem solid black;
 }
 label:hover {
   filter: brightness(90%);
