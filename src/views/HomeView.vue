@@ -25,10 +25,10 @@ const categories = ref([
 ])
 const difficulties = ref(['Easy', 'Medium', 'Hard'])
 
-const numbers = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20])
+const numbers = ref([5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20])
 
 const apiQuery = ref({
-  numOfQuestions: 0,
+  numOfQuestions: 5,
   difficulty: '',
   category: ''
 })

@@ -50,7 +50,7 @@ const options = computed(() => {
 
 <template>
   <div class="column is-half-desktop">
-    <h1 class="is-size-4">{{ question }}</h1>
+    <h1 class="is-size-5">{{ question }}</h1>
 
     <BaseRadioGroup v-model="selected" :name="index" :options="options" />
 

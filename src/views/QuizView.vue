@@ -19,6 +19,7 @@ const showModal = ref(false)
 
 const toggler = () => {
   toggle.value = !toggle.value
+  showModal.value = !showModal.value
 }
 
 const toggleModal = () => {
@@ -61,7 +62,7 @@ onMounted(async () => {
     <button
       v-if="quizData"
       class="button is-primary m-4"
-      @click="scoreboard.checkAnswers(), toggler(), scoreboard.quizCompleted(), toggleModal()"
+      @click="scoreboard.checkAnswers(), toggler(), scoreboard.quizCompleted()"
       :class="{ toggle: toggle }"
     >
       Check Answers
@@ -70,7 +71,7 @@ onMounted(async () => {
     <button
       v-if="quizData"
       class="button is-primary m-4"
-      :class="{ toggle: showModal }"
+      :class="{ toggle: !toggle }"
       @click="toggleModal()"
     >
       Menu
